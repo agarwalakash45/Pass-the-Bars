@@ -13,6 +13,7 @@ blue=(67,148,154)
 green=(1,148,119)
 red=(255,0,0)
 purple=(86,24,125)
+yellow=(238,201,0)
 
 
 bars_count=15
@@ -52,7 +53,7 @@ def create_bars(total_bars):             #Method to create bars
 
 def display_bars(bars):                 #Method to display bars
     for element in bars:
-        gameDisplay.fill(red,[element[0],element[1],element[2],bar_height])
+        gameDisplay.fill(yellow,[element[0],element[1],element[2],bar_height])
 
 
 def bars_shift(bars,bar_shift):         #TO handle bar shifting in vertical direction
@@ -111,7 +112,14 @@ def game_play():
     bars=create_bars(bars_count)
 
     while not gameExit:
-    
+
+        if gameOver==False:
+            #gameDisplay.fill(white)
+            display_message("You Crashed!!",red,50)
+            display_message("Press P to play, Q to quit",black,25,75)
+            pygame.display.update()
+
+            
         while not gameOver:          #Game Over loop
 
             for event in pygame.event.get():
@@ -129,12 +137,6 @@ def game_play():
                         pygame.quit()
                         quit()
                         
-            gameDisplay.fill(white)
-            display_message("You Crashed!!",red,50)
-            display_message("Press P to play, Q to quit",black,25,75)
-            pygame.display.update()
-
-
         for event in pygame.event.get():
             if event.type==pygame.QUIT:     #If close is clicked
                 gameOver=True               #Exit from the game
